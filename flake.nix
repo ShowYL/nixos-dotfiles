@@ -36,11 +36,18 @@
       };
     };
     noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
+    # Noctalia Greeter (system login screen)
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
     {
       nixpkgs,
+      noctalia-greeter,
       ...
     }@inputs:
     {
@@ -48,12 +55,13 @@
 
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
 
           modules = [
+            { nixpkgs.hostPlatform = "x86_64-linux"; }
             ./nixos/configuration.nix
             inputs.home-manager.nixosModules.default
+            noctalia-greeter.nixosModules.default
           ];
         };
       };

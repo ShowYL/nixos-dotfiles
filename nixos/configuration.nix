@@ -37,10 +37,20 @@
     config.allowUnfree = true;
   };
 
+  # Enable systemd in initrd (Required for TPM2 LUKS auto-unlock)
+  boot.initrd.systemd.enable = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
-    systemd-boot.enable = true;
+    systemd-boot.enable = false;
     efi.canTouchEfiVariables = true;
+
+    limine = {
+      enable = true;
+      secureBoot.enable = true; # Enables sbctl signing during rebuilds
+      maxGenerations = 10;
+      enableEditor = false; # Disables editing kernel cmdline at boot (prevents bypassing security)
+    };
   };
 
   hardware = {
@@ -80,7 +90,11 @@
       ];
 
       # Allow the Tailscale UDP port through the firewall
-      allowedUDPPorts = [ config.services.tailscale.port ];
+      allowedUDPPorts = [
+        config.services.tailscale.port
+        53317 # Localsend
+      ];
+      allowedTCPPorts = [ 53317 ];
       # See https://github.com/tailscale/tailscale/issues/4432#issuecomment-1112819111
       checkReversePath = "loose";
     };
@@ -148,6 +162,9 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
+    sbctl # Secure Boot key manager
+    limine # Limine bootloader CLI
+    tpm2-tools # To inspect TPM status
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     neovim
@@ -157,6 +174,7 @@
     kitty
     fish
     nerd-fonts.jetbrains-mono
+    bibata-cursors
     bat
     eza
     zsh
@@ -183,7 +201,6 @@
     steam.enable = true;
     fish.enable = true;
     git.enable = true;
-    firefox.enable = true;
   };
 
   # List services that you want to enable:
@@ -212,6 +229,27 @@
 
     qemuGuest.enable = true;
     spice-vdagentd.enable = true;
+
+    displayManager.noctalia-greeter = {
+      enable = true;
+
+      settings = {
+        keyboard.layout = "fr";
+
+        cursor = {
+          theme = "Bibata-Modern-Ice";
+          size = 24;
+        };
+
+        # Default session to Hyprland
+        session.default = "Hyprland";
+      };
+
+      # Allow user session to sync wallpapers & themes to the greeter seamlessly
+      passwordless-sync-users = [ "yann" ];
+    };
+
+    accounts-daemon.enable = true;
   };
 
   virtualisation = {
