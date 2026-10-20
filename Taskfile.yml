@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+vars:
+  ARGS: --flake .#nixos --accept-flake-config
+
+tasks:
+  switch:
+    desc: "The switch subcommand will rebuild your system, activate the new generation immediately and make it the default boot option."
+    cmd: "sudo nixos-rebuild switch {{.ARGS}}"
+
+  build:
+    desc: "Build the configuration and place a symlink called result pointing to the derivation in the Nix store in the current directory."
+    cmd: "sudo nixos-rebuild build {{.ARGS}}"
+
+  boot:
+    desc: "Build the configuration and make it the default boot option, but don't activate it until the next reboot"
+    cmd: "sudo nixos-rebuild boot {{.ARGS}}"
+
+  test:
+    desc: "Build the configuration and activate it, but don't add it to the bootloader menu"
+    cmd: "sudo nixos-rebuild test {{.ARGS}}"
+
+  build-vm:
+    desc: "Build a QEMU VM that runs the new configuration. It leaves a symlink called result in the current directory that contains the built VM. To run it, use result/bin/run-<hostname>-vm"
+    cmd: "sudo nixos-rebuild build-vm {{.ARGS}}"
+
+  dry-activate:
+    desc: "Build the configuration, but do not activate it. Instead, show the changes that would be performed by activating the new generation."
+    cmd: "sudo nixos-rebuild dry-activate {{.ARGS}}"
