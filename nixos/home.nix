@@ -82,6 +82,7 @@
       nwg-look
       inkscape
       openssl
+      hyprpicker
       virt-manager
       qemu
       yt-dlp

@@ -104,6 +104,20 @@
     rtkit.enable = true;
   };
 
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
+    # Allows your user to use binary caches (like the Cachix in your flake)
+    # without Nix complaining that the flake configuration is untrusted
+    trusted-users = [
+      "root"
+      "@wheel"
+    ];
+  };
+
   # Configure network connections interactively with nmcli or nmtui.
 
   # Set your time zone.

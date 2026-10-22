@@ -55,10 +55,10 @@
 
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
 
           modules = [
-            { nixpkgs.hostPlatform = "x86_64-linux"; }
             ./nixos/configuration.nix
             inputs.home-manager.nixosModules.default
             noctalia-greeter.nixosModules.default
