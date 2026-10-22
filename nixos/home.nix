@@ -55,6 +55,7 @@
       gnumake
       cmake
       go
+      python3
       cargo
       lua
       go-task
