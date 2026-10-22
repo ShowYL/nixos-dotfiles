@@ -1,8 +1,6 @@
 {
   pkgs,
   lib,
-  config,
-  hostname,
   inputs,
   ...
 }:
@@ -109,6 +107,7 @@
   helium.enable = true;
   starship.enable = true;
   fish.enable = true;
+  zsh.enable = true;
   gh.enable = true;
   kitty.enable = true;
   gtk.enable = true;

@@ -1,8 +1,6 @@
 {
-  pkgs,
   lib,
   config,
-  inputs,
   ...
 }:
 {
@@ -36,6 +34,8 @@
             if type -q fzf
                 fzf --fish | source
             end
+
+            set --export PATH $HOME/go/bin $PATH
 
             # mise
             eval "$(mise activate fish)"
