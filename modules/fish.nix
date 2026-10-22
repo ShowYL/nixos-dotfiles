@@ -16,39 +16,36 @@
     programs.fish = {
       enable = true;
       interactiveShellInit = /* fish */ ''
-        # Commands to run in interactive sessions can go here
-        if status is-interactive
-            # No greeting
-            set fish_greeting
+        # No greeting
+        set fish_greeting
 
-            # Use starship
-            function starship_transient_prompt_func
-                starship module character
-            end
-            if test "$TERM" != linux
-                starship init fish | source
-                enable_transience
-            end
-
-            # Fuzzy Finder Integration
-            if type -q fzf
-                fzf --fish | source
-            end
-
-            set --export PATH $HOME/go/bin $PATH
-
-            # mise
-            eval "$(mise activate fish)"
-
-            # Aliases
-            # kitty doesn't clear properly so we need to do this weird printing
-            alias clear "printf '\033[2J\033[3J\033[1;1H'"
-            alias celar "printf '\033[2J\033[3J\033[1;1H'"
-            alias claer "printf '\033[2J\033[3J\033[1;1H'"
-            alias ls 'eza --group-directories-first --icons=auto --color=auto --classify'
-            alias ll 'eza -l --group-directories-first --icons=auto --color=auto --git'
-            alias la 'eza -la --group-directories-first --icons=auto --color=always --git'
+        # Use starship
+        function starship_transient_prompt_func
+            starship module character
         end
+        if test "$TERM" != linux
+            starship init fish | source
+            enable_transience
+        end
+
+        # Fuzzy Finder Integration
+        if type -q fzf
+            fzf --fish | source
+        end
+
+        set --export PATH $HOME/go/bin $PATH
+
+        # mise
+        eval "$(mise activate fish)"
+
+        # Aliases
+        # kitty doesn't clear properly so we need to do this weird printing
+        alias clear "printf '\033[2J\033[3J\033[1;1H'"
+        alias celar "printf '\033[2J\033[3J\033[1;1H'"
+        alias claer "printf '\033[2J\033[3J\033[1;1H'"
+        alias ls 'eza --group-directories-first --icons=auto --color=auto --classify'
+        alias ll 'eza -l --group-directories-first --icons=auto --color=auto --git'
+        alias la 'eza -la --group-directories-first --icons=auto --color=always --git'
       '';
     };
   };
