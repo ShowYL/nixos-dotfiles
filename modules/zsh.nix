@@ -46,6 +46,14 @@
           eval "$(mise activate zsh)"
         fi
 
+        # pnpm
+        export PNPM_HOME='/home/yann/.local/share/pnpm'
+        case ":$PATH:" in
+          ":$PNPM_HOME/bin:"*) ;;
+          *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+        esac
+        # pnpm end
+
         # Aliases
         # kitty doesn't clear properly so we need to do this weird printing
         alias clear="printf '\033[2J\033[3J\033[1;1H'"

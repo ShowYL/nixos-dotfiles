@@ -38,6 +38,11 @@
         # mise
         eval "$(mise activate fish)"
 
+        # pnpm
+        set -gx PNPM_HOME /home/yann/.local/share/pnpm
+        fish_add_path "$PNPM_HOME/bin"
+        # pnpm end
+
         # Aliases
         # kitty doesn't clear properly so we need to do this weird printing
         alias clear "printf '\033[2J\033[3J\033[1;1H'"
