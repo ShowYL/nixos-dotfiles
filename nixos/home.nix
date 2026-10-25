@@ -56,10 +56,13 @@
       ddcutil
       cmake
       go
+      ripgrep
       python3
       cargo
       lua
       go-task
+      lazygit
+      lazydocker
       mise
       rustc
       zsh
