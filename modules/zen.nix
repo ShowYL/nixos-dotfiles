@@ -22,9 +22,28 @@
       enable = true;
       setAsDefaultBrowser = true;
 
+      policies = {
+        DisableAppUpdate = true;
+        DisablePocket = true;
+        DisableTelemetry = true;
+        DontCheckDefaultBrowser = true;
+        EnableTrackingProtection = {
+          Value = true;
+          Locked = true;
+          Cryptomining = true;
+          Fingerprinting = true;
+        };
+      };
+
       profiles.default = {
         settings = {
           "zen.workspaces.continue-where-left-off" = true;
+        };
+
+        sine = {
+          enable = true;
+          mods = [
+          ];
         };
       };
     };

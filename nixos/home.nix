@@ -53,6 +53,7 @@
       xar
       clang
       gnumake
+      ddcutil
       cmake
       go
       python3
