@@ -14,8 +14,5 @@ hl.env(
 
 -- Themes
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
-hl.env("QT_QPA_PLATFORMTHEME", "kde")
-hl.env("XDG_MENU_PREFIX", "plasma-")
-
--- To sync with noctalia theme
--- hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+-- QT_QPA_PLATFORMTHEME / QT_PLUGIN_PATH are injected from Home Manager's qt
+-- settings in hyprland.nix.

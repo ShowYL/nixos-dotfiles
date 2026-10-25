@@ -42,68 +42,86 @@
 
   home = {
     packages = with pkgs; [
-      vim
-      nil
-      nixfmt
-      nixd
+      # Shell
+      zsh
+
+      # Editors
       neovim
-      curl
-      wget
-      git
-      xar
+      vim
+      vscodium
+      zed-editor
+
+      # Nix tooling
+      nil
+      nixd
+      nixfmt
+
+      # Languages & build tools
+      cargo
       clang
-      gnumake
-      ddcutil
       cmake
       go
-      ripgrep
-      python3
-      cargo
-      lua
       go-task
-      lazygit
-      lazydocker
+      gradle
+      gnumake
+      jdk25
+      lua
+      maven
       mise
+      nodejs_26
+      python3
       rustc
-      zsh
-      btop
-      fastfetch
-      cheese
-      fzf
-      bibata-cursors
-      tree
-      nautilus
-      nerd-fonts.jetbrains-mono
-      google-fonts
-      jq
-      adw-gtk3
-      libreoffice
-      vlc
-      eza
+
+      # Version control & containers
+      git
+      lazydocker
+      lazygit
+
+      # CLI utilities
       bat
+      btop
+      curl
+      eza
+      fastfetch
+      fzf
+      jq
+      openssl
+      ripgrep
+      tree
+      unzip
+      wget
+      xar
+      zip
+
+      # Fonts, cursors & theming
+      adw-gtk3
+      bibata-cursors
+      google-fonts
+      nerd-fonts.jetbrains-mono
+
+      # Desktop & Hyprland utilities
+      ddcutil
+      hyprpicker
       nwg-displays
       nwg-look
-      inkscape
-      openssl
-      hyprpicker
-      virt-manager
-      qemu
-      yt-dlp
-      nodejs_26
-      gradle
-      maven
-      vscodium
-      jdk25
+
+      # Applications
       beekeeper-studio
+      cheese
+      inkscape
+      libreoffice
       localsend
-      zip
-      unzip
-      zed-editor
+      nautilus
+      vlc
+      yt-dlp
+
+      # Virtualization
+      qemu
+      virt-manager
     ];
 
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
-      NIXOS_FORCE_FONTCONFIG_DIRS = "1";
     };
   };
 
@@ -116,6 +134,7 @@
   gh.enable = true;
   kitty.enable = true;
   gtk.enable = true;
+  qt.enable = true;
   zen.enable = true;
 
   dconf.settings = {

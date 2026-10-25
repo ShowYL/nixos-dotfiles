@@ -63,7 +63,6 @@
     enableRedistributableFirmware = true;
     firmware = with pkgs; [
       ivsc-firmware
-      linux-firmware
     ];
 
     graphics = {
@@ -276,9 +275,12 @@
       settings = {
         keyboard.layout = "fr";
 
+        # Same cursor as the Hyprland session (hyprland.lua sets
+        # Bibata-Modern-Classic, size 24 at startup).
         cursor = {
-          theme = "Bibata-Modern-Ice";
+          theme = "Bibata-Modern-Classic";
           size = 24;
+          path = pkgs.bibata-cursors;
         };
 
         # Default session to Hyprland

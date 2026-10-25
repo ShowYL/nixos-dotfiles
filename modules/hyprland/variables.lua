@@ -1,4 +1,4 @@
 terminal = "kitty"
 fileManager = "nautilus"
-browser = "zen-browser"
-codeEditor = "code"
+browser = "zen-beta"
+codeEditor = "codium"
