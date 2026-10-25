@@ -5,7 +5,6 @@
 {
   inputs,
   config,
-  lib,
   pkgs,
   ...
 }:
@@ -210,6 +209,13 @@
       enable = true;
       package = pkgs.unstablePkgs.hyprland;
       portalPackage = pkgs.unstablePkgs.xdg-desktop-portal-hyprland;
+    };
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc.lib
+      ];
     };
 
     steam.enable = true;
