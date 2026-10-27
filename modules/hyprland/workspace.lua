@@ -39,6 +39,10 @@ hl.bind(
 	{ description = "Window: Send to special workspace" }
 )
 
-hl.workspace_rule({ workspace = "1", monitor = "DP-1", persistent = true, default_name = "web" })
-hl.workspace_rule({ workspace = "2", monitor = "DP-1", persistent = true, default_name = "code" })
-hl.workspace_rule({ workspace = "3", monitor = "DP-1", persistent = true, default_name = "terminal" })
+-- Names only: the monitor assignment is managed by nwg-displays
+-- (~/.config/hypr/workspaces.lua, required at the end of hyprland.lua).
+-- Workspace rules are merged, so nwg-displays can override the monitor
+-- without losing these names.
+hl.workspace_rule({ workspace = "1", persistent = true, default_name = "web" })
+hl.workspace_rule({ workspace = "2", persistent = true, default_name = "code" })
+hl.workspace_rule({ workspace = "3", persistent = true, default_name = "terminal" })

@@ -28,6 +28,12 @@
         window_margin_width = 0;
         confirm_os_window_close = 0;
         shell = "fish";
+
+        # Kitty caches the last window geometry/state in ~/.cache/kitty/main.json.
+        # Replaying a cached "maximized" state made every new kitty open
+        # maximized (and thus take over the whole workspace), so let Hyprland
+        # decide the initial size instead.
+        remember_window_size = false;
       };
 
       keybindings = {

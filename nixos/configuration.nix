@@ -55,6 +55,10 @@
   hardware = {
     bluetooth.enable = true;
 
+    # /dev/i2c-* access for ddcutil (external monitor brightness/contrast).
+    # Creates the "i2c" group, loads i2c-dev and installs udev rules.
+    i2c.enable = true;
+
     ipu6 = {
       enable = true;
       platform = "ipu6ep";
@@ -168,6 +172,8 @@
       "libvirtd"
       "docker"
       "video"
+      "i2c" # ddcutil
+      "kvm" # hardware acceleration for libvirt/QEMU
     ];
   };
 
@@ -210,6 +216,11 @@
       portalPackage = pkgs.unstablePkgs.xdg-desktop-portal-hyprland;
     };
 
+    # Shells available system-wide (their user config lives in modules/*.nix).
+    bash.enable = true;
+    fish.enable = true;
+    zsh.enable = true;
+
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
@@ -218,7 +229,6 @@
     };
 
     steam.enable = true;
-    fish.enable = true;
     git.enable = true;
   };
 
@@ -245,6 +255,12 @@
   services = {
     # Enable the OpenSSH daemon.
     openssh.enable = true;
+
+    # GVfs: trash, network shares, MTP devices, ... (pulls udisks2 + fuse)
+    gvfs.enable = true;
+
+    # ddcutil udev rules grant access to /dev/i2c-* for the logged-in seat.
+    udev.packages = [ pkgs.ddcutil ];
 
     gnome.gnome-keyring.enable = true;
 
@@ -305,7 +321,31 @@
     };
   };
 
+  # libvirtd ships the "default" network definition but does not define,
+  # autostart or start it. Do it once at boot so virbr0/NAT is available.
+  systemd.services.libvirt-default-network = {
+    description = "Define and start the libvirt default network";
+    wantedBy = [ "multi-user.target" ];
+    after = [
+      "libvirtd.service"
+      "virtlogd.service"
+    ];
+    wants = [ "libvirtd.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      ${pkgs.libvirt}/bin/virsh net-define ${pkgs.libvirt}/var/lib/libvirt/qemu/networks/default.xml 2>/dev/null || true
+      ${pkgs.libvirt}/bin/virsh net-autostart default
+      ${pkgs.libvirt}/bin/virsh net-start default 2>/dev/null || true
+    '';
+  };
+
   home-manager = {
+    # Move conflicting files out of the way instead of failing activation.
+    backupFileExtension = "hm-backup";
+
     extraSpecialArgs = {
       inherit inputs;
       hostName = config.networking.hostName;

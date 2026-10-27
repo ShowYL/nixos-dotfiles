@@ -50,6 +50,14 @@
         ${builtins.readFile ./hyprland/monitors.lua}
         ${builtins.readFile ./hyprland/tactile.lua}
         ${builtins.readFile ./hyprland/workspace.lua}
+
+        -- nwg-displays writes these files next to hyprland.lua when applying
+        -- monitor/workspace changes. They must be loaded last so they can
+        -- override the baked-in defaults above. pcall keeps the config valid
+        -- when the files do not exist yet.
+        pcall(require, "monitors")
+        pcall(require, "workspaces")
+
         ${if config.noctalia.enable then "require(\"noctalia\").apply_theme()" else ""}
       '';
     };

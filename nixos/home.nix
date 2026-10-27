@@ -129,6 +129,7 @@
   noctalia.enable = true;
   helium.enable = true;
   starship.enable = true;
+  bash.enable = true;
   fish.enable = true;
   zsh.enable = true;
   gh.enable = true;
