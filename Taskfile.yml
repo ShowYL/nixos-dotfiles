@@ -29,3 +29,28 @@ tasks:
   dry-activate:
     desc: "Build the configuration, but do not activate it. Instead, show the changes that would be performed by activating the new generation."
     cmd: "sudo nixos-rebuild dry-activate {{.ARGS}}"
+
+  update:
+    desc: "Update all flake inputs. Use `task update:<input>` to update a single one (e.g. `task update:noctalia`)."
+    cmds:
+      - nix flake update {{.CLI_ARGS}}
+      - git --no-pager diff --stat -- flake.lock
+
+  update:*:
+    desc: "Update one or more flake inputs, e.g. `task update:noctalia` or `task update:noctalia:home-manager:nixpkgs`."
+    vars:
+      INPUTS: '{{ join " " (splitList ":" (index .MATCH 0)) }}'
+      VALID_INPUTS:
+        sh: nix flake metadata --no-write-lock-file --json . | jq -r '.locks.nodes.root.inputs | keys | join(" ")'
+    preconditions:
+      - sh: |
+          for input in {{.INPUTS}}; do
+            case " {{.VALID_INPUTS}} " in
+              *" $input "*) ;;
+              *) exit 1 ;;
+            esac
+          done
+        msg: "unknown flake input in '{{.INPUTS}}'. Valid inputs: {{.VALID_INPUTS}}"
+    cmds:
+      - nix flake update {{.INPUTS}}
+      - git --no-pager diff --stat -- flake.lock
