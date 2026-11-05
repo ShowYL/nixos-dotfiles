@@ -112,6 +112,21 @@
       libreoffice
       localsend
       nautilus
+      papers
+      gnome-boxes
+      cine
+      bottles
+      keypunch
+      eog
+      bookup
+      foliate
+      nucleus
+      crosswords
+      gnome-weather
+      epiphany
+      gnome-calculator
+      gnome-calendar
+      gnome-maps
       vlc
       yt-dlp
 
