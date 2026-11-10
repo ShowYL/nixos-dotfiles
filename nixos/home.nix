@@ -68,9 +68,12 @@
       lua
       maven
       mise
+      pkg-config
       nodejs_26
       python3
       rustc
+      meson
+      uv
 
       # Version control & containers
       git
@@ -106,6 +109,7 @@
       nwg-look
 
       # Applications
+      seahorse
       beekeeper-studio
       cheese
       inkscape
@@ -118,6 +122,7 @@
       bottles
       keypunch
       eog
+      pavucontrol
       bookup
       foliate
       nucleus

@@ -104,6 +104,7 @@
 
   security = {
     rtkit.enable = true;
+    pam.services.greetd.enableGnomeKeyring = true;
   };
 
   nix.settings = {
@@ -199,6 +200,7 @@
     virt-manager
     gnumake
     tree
+    glib
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -255,6 +257,8 @@
   services = {
     # Enable the OpenSSH daemon.
     openssh.enable = true;
+
+    dbus.enable = true;
 
     # GVfs: trash, network shares, MTP devices, ... (pulls udisks2 + fuse)
     gvfs.enable = true;
