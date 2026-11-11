@@ -232,6 +232,10 @@
 
     steam.enable = true;
     git.enable = true;
+    nm-applet = {
+      enable = true;
+      indicator = true;
+    };
   };
 
   xdg.portal = {
