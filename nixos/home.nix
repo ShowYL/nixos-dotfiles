@@ -85,6 +85,7 @@
       btop
       curl
       eza
+      typst
       fastfetch
       fzf
       jq
