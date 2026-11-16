@@ -1,0 +1,4 @@
+[submodule "modules/nvim"]
+	path = modules/nvim
+	url = http://github.com/ShowYL/LazyVim
+	branch = main

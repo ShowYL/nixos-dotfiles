@@ -155,6 +155,7 @@
   zsh.enable = true;
   gh.enable = true;
   kitty.enable = true;
+  neovim.enable = true;
   gtk.enable = true;
   qt.enable = true;
   zen.enable = true;
