@@ -9,13 +9,17 @@
   };
 
   config = lib.mkIf config.neovim.enable {
-    # Symlink ~/.config/nvim directly into the writable modules/nvim submodule
-    # checkout (outside the Nix store) so edits live in the submodule and can
-    # be committed. We use an absolute path because, with flakes, `./nvim`
-    # resolves to Nix's store source copy which does not include submodule
-    # content. mkOutOfStoreSymlink keeps the target outside the read-only store.
+    # Symlink ~/.config/nvim into the modules/nvim submodule checkout so edits
+    # live in the submodule and can be committed. mkOutOfStoreSymlink keeps the
+    # target outside the read-only Nix store.
+    #
+    # The path is relative to $HOME (assumes the repo is cloned to
+    # ~/.config/nixos) so the configuration works on other machines after
+    # `git submodule update --init`. With flakes, ./modules/nvim resolves to
+    # Nix's store source snapshot, which excludes submodule content, so a real
+    # filesystem path is required.
     home.file.".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/yann/.config/nixos/modules/nvim";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/nixos/modules/nvim";
     };
   };
 }
