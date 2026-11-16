@@ -47,7 +47,7 @@
         alias clear="printf '\033[2J\033[3J\033[1;1H'"
         alias celar="printf '\033[2J\033[3J\033[1;1H'"
         alias claer="printf '\033[2J\033[3J\033[1;1H'"
-        alias ls='eza --group-directories-first --icons=auto --color=auto --classify'
+        alias ls='eza --group-directories-first --icons=auto --color=auto --classify=auto'
         alias ll='eza -l --group-directories-first --icons=auto --color=auto --git'
         alias la='eza -la --group-directories-first --icons=auto --color=always --git'
       '';
