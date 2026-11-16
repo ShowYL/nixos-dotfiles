@@ -9,9 +9,12 @@
   };
 
   config = lib.mkIf config.neovim.enable {
+    # Symlink ~/.config/nvim directly into the writable modules/nvim submodule
+    # checkout (outside the Nix store) so edits live in the submodule and can
+    # be committed. Plain `source = ./nvim` would copy the submodule into the
+    # read-only Nix store instead.
     home.file.".config/nvim" = {
-      source = ./nvim;
-      type = "symlink";
+      source = config.lib.file.mkOutOfStoreSymlink ./nvim;
     };
   };
 }
