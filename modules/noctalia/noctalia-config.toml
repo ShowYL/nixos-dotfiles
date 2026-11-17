@@ -24,7 +24,7 @@ start = [ "launcher", "theme_mode", "wallpaper", "inbox", "widget_2", "group:g1"
     accordion = false
     accordion_direction = "end"
     enabled = true
-    fill = "surface_variant"
+    fill = "surface_container"
     id = "g1"
     members = [ "ram", "sysmon", "cpu" ]
     opacity = 0.0
@@ -34,7 +34,7 @@ start = [ "launcher", "theme_mode", "wallpaper", "inbox", "widget_2", "group:g1"
     accordion = false
     accordion_direction = "end"
     enabled = true
-    fill = "surface_variant"
+    fill = "surface_container"
     id = "g2"
     members = [ "status", "bar" ]
     opacity = 0.0
@@ -44,7 +44,7 @@ start = [ "launcher", "theme_mode", "wallpaper", "inbox", "widget_2", "group:g1"
     accordion = false
     accordion_direction = "end"
     enabled = false
-    fill = "surface_variant"
+    fill = "surface_container"
     id = "g3"
     members = [ "network_rx", "network_tx" ]
     opacity = 0.0
@@ -272,6 +272,7 @@ enabled = [
     "yocraft/web-launcher",
     "cleboost/zed-provider",
     "noctalia/translator",
+    "noctalia/wallpaper_depth",
     "cleboost/jetbrains-provider",
     "rylos/tailnet",
     "nightwatch75/file-search",
@@ -346,9 +347,6 @@ enabled = false
 [widget.cpu]
 glyph = "cpu"
 visualization = "none"
-
-[widget.eyecare-widget]
-type = "apex077/eyecare:eyecare-widget"
 
 [widget.inbox]
 type = "hy4ri/github-notifications:inbox"
