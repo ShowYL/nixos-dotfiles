@@ -111,6 +111,7 @@
 
       # Applications
       seahorse
+      bruno
       beekeeper-studio
       cheese
       inkscape
