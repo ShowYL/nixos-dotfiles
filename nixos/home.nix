@@ -96,6 +96,7 @@
       wget
       xar
       zip
+      sysbench
 
       # Fonts, cursors & theming
       adw-gtk3
@@ -111,11 +112,19 @@
 
       # Applications
       seahorse
+      jetbrains.idea
+      onlyoffice-desktopeditors
+      markdown-toc
+      markdownlint-cli2
+      ast-grep
+      luarocks
+      fd
       bruno
       beekeeper-studio
+      usbutils
+      gnome-text-editor
       cheese
       inkscape
-      libreoffice
       localsend
       nautilus
       papers

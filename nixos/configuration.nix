@@ -227,6 +227,9 @@
       enable = true;
       libraries = with pkgs; [
         stdenv.cc.cc.lib
+        zlib
+        openssl
+        glibc
       ];
     };
 
